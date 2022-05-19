@@ -1,5 +1,12 @@
 img {
-    width: 500px;
+    width: 380px;
     height: auto;
     background-color: lightblue;
+}
+
+@media(min-width: 400px) {
+    img {
+        width: 400px;
+        height: auto;
+    }
 }
