@@ -4,6 +4,10 @@ img {
     background-color: lightblue;
 }
 
+h1 {
+    color: darkblue;
+}
+
 @media(min-width: 400px) {
     img {
         width: 400px;
