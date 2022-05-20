@@ -1,3 +1,7 @@
+/* body {
+    background-image: url("/static/images/sea.jpg");
+} */
+
 img {
     width: auto;
     height: auto;
@@ -7,6 +11,14 @@ img {
 h1 {
     color: darkblue;
 }
+
+h2 {
+    color: lightseagreen;
+}
+
+/* .div-content {
+    background-color: white;
+} */
 
 @media(min-width: 400px) {
     img {
