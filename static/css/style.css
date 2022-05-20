@@ -1,5 +1,5 @@
 img {
-    width: 380px;
+    width: auto;
     height: auto;
     background-color: lightblue;
 }
@@ -10,7 +10,7 @@ h1 {
 
 @media(min-width: 400px) {
     img {
-        width: 400px;
+        width: auto;
         height: auto;
     }
 }
