@@ -20,6 +20,12 @@ h2 {
     background-color: white;
 } */
 
+.problem {
+    height: 300px;
+    width: 300px;
+    background-color: lightblue;
+}
+
 @media(min-width: 400px) {
     img {
         width: auto;
