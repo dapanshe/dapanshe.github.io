@@ -26,6 +26,19 @@ h2 {
     background-color: lightblue;
 }
 
+.header {
+    height: 50px;
+    width: 100%;
+    background-color: lightskyblue;
+}
+
+.header-link {
+    font-size: 50px;
+    font-family: serif;
+    top: center;
+    margin-left: 300px;
+}
+
 @media(min-width: 400px) {
     img {
         width: auto;
