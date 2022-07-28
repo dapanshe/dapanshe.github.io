@@ -1,69 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GYP国际学科考试</title>
-
-    <link rel="stylesheet" href="/static/css/style.css">
-    <script src="/static/js/jquery-3.6.0.min.js"></script>
+    <title>Document</title>
+    <style>
+        .problem-region {
+            background-color: pink;
+            padding-left: 600px;
+            padding-top: 50px;
+        }
+        .problem2 {
+            background-color: lightblue;
+            margin-top: 200px;
+            padding-left: 600px;
+        }
+        .problem2 > img{
+            margin-top: 500px;
+        }
+    </style>
 </head>
-
 <body>
-    <div class="header">
-        <span class="header-link">SAT</span>
-        <span class="header-link">AP</span>
-        <span class="header-link">AMC</span>
-    </div>
-    <h1>历年APCSA 真题答案</h1>
-    <div>
-        https://gimg2.baidu.com/image_search/src=http%3A%2F%2Finews.gtimg.com%2Fnewsapp_match%2F0%2F11156556256%2F0.jpg&refer=http%3A%2F%2Finews.gtimg.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg
-    </div>
-    <div class="div-content">
-        <h2>A 按年份</h2>
-
-        <h3>2017新大纲之后（无interface）</h3>
-        <div>
-            <a href="static/files/2021/ap21-frq-computer-science-a.pdf" target="_blank">2021</a> <br>
-            <a href="static/files/2020/ap20-frq-computer-science-a.pdf" target="_blank">2020</a> <br>
-            <a href="static/files/2019/ap19-frq-computer-science-a.pdf" target="_blank">2019</a> <br>
-            <a href="static/files/2018/ap18-frq-computer-science-a.pdf" target="_blank">2018</a>
+    <div id="app">
+        <div v-if="getRandom">
+            Now you see me
+          </div>
+          <div v-else>
+            Now you don't
+          </div>
+        <div class = 'problem-region'>
+            <img :src='getImgSrc' :alt='proTitle'>
+            <br>
+                <input type="radio" id="A" value="A" style="height: 20px; width: 20px;" v-model="picked[problemId - 301]" />
+                <label for="one" style="padding-right: 30px;">A</label>
+                <input type="radio" id="B" value="B" style="height: 20px; width: 20px" v-model="picked[problemId - 301]" />
+                <label for="two" style="padding-right: 30px;">B</label>
+                <input type="radio" id="C" value="C" style="height: 20px; width: 20px" v-model="picked[problemId - 301]" />
+                <label for="two" style="padding-right: 30px;">C</label>
+                <input type="radio" id="D" value="D" style="height: 20px; width: 20px" v-model="picked[problemId - 301]" />
+                <label for="two" style="padding-right: 30px;">D</label>
+                <br />
+                <span>Picked: {{ picked }}</span>
+            <br>
+            <button @click="nextProblem($event)">NEXT PROBLEM</button>
+            <br>
+            <button @click="preProblem">PREVIOUS PROBLEM</button>
         </div>
-        <h3>2013大纲之后 （无LAB）</h3>
-        <div>
-            <a href="static/files/2017/ap17-frq-computer-science-a.pdf" target="_blank">2017</a> <br>
-            <a href="static/files/2016/ap16-frq-computer-science-a.pdf" target="_blank">2016</a> <br>
-            <a href="static/files/2015/ap15-frq-computer-science-a.pdf" target="_blank">2015</a> <br>
-            <a href="static/files/2014/ap14-frq-computer-science-a.pdf" target="_blank">2014</a>
+        <button @click = 'changeTrue'>change css</button>
+
+        <div :class = '{problem2: isP2}'>
+            <ol>
+                <li v-for="p in probs" style="marginTop: 100px;">
+                <img :src="p.src" alt="test">
+                
+                </li>
+                
+            </ol>
         </div>
-        <h3>2013以前 （有LAB）</h3>
     </div>
-
-    <div>
-        <h2>B 按考察范围</h2>
-    </div>
-
-    <div class="problem">
-        <script type="module">
-            import { print, main } from "/static/js/index.js";
-            console.log("Hello world");
-            print();
-            main();
-        </script>
-
-
-    </div>
-
-    <div>
-        <img src="static/images/questions/q1.png" alt="Quesion1" id="pi">
-    </div>
-
-    <script async src="https://cdn.ly522.com/js/jilei.pure.mini.js"></script> 
-    <span id="jilei_container_site_pv">本站总访问量<span id="jilei_value_site_pv"></span>次</span> 
-    <span class="post-meta-divider">|</span> 
-    <span id="jilei_container_site_uv">本站访客数<span id="jilei_value_site_uv"></span>人</span></p>
+    <script src="./vue3.js"></script>
+    <script>
+        let root = {
+            data(){
+                return {
+                    problemId : 301,
+                    imgSrc: './problems/2019/20190301/201903010301.png',
+                    proTitle: 'problems',
+                    isP2: true,
+                    probs: [
+                        {
+                            src: './problems/2019/20190301/201903010301.png',
+                            year: 2019,
+                            paperID: 20190301
+                        },
+                        {
+                            src: './problems/2019/20190301/201903010302.png',
+                            year: 2019,
+                            paperID: 20190301
+                        },{
+                            src: './problems/2019/20190301/201903010303.png',
+                            year: 2019,
+                            paperID: 20190301
+                        },{
+                            src: './problems/2019/20190301/201903010304.png',
+                            year: 2019,
+                            paperID: 20190301
+                        },{
+                            src: './problems/2019/20190301/201903010305.png',
+                            year: 2019,
+                            paperID: 20190301
+                        },{
+                            src: './problems/2019/20190301/201903010306.png',
+                            year: 2019,
+                            paperID: 20190301
+                        },{
+                            src: './problems/2019/20190301/201903010307.png',
+                            year: 2019,
+                            paperID: 20190301
+                        },{
+                            src: './problems/2019/20190301/201903010308.png',
+                            year: 2019,
+                            paperID: 20190301
+                        }
+                        ],
+                    randNum: 0,
+                    picked: []
+                }
+            },
+            computed: {
+                getRandom() {
+                    return this.randNum > 0.5
+                },
+                getImgSrc() {
+                    return './problems/2019/20190301/201903010' + this.problemId +'.png'
+                }
+            },
+            mounted(){
+                setInterval(() => {
+                    this.randNum = Math.random()
+                }, 2000);
+                this.picked = new Array(20)
+                this.picked.fill('')
+                console.log(this.picked)
+            },
+            methods: {
+                changeTrue(){
+                    this.isP2 = !this.isP2
+                },
+                nextProblem(event){
+                    this.problemId++
+                    // this.imgSrc = './problems/2019/20190301/201903010' + this.problemId +'.png' 
+                    console.log(event)
+                },
+                preProblem(){
+                    if (this.problemId >= 302){
+                        this.problemId--
+                    }else{
+                        alert('no more previous')
+                    }
+                }
+            }
+        }
+        const app = Vue.createApp(root)
+        const vm = app.mount('#app ')
+    </script>
 </body>
-
 </html>
