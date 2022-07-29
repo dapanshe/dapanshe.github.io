@@ -10,6 +10,7 @@
             background-color: pink;
             padding-left: 600px;
             padding-top: 50px;
+            height: 900px;
         }
         .problem2 {
             background-color: lightblue;
@@ -18,6 +19,9 @@
         }
         .problem2 > img{
             margin-top: 500px;
+        }
+        .selected {
+            background-color: red;
         }
     </style>
 </head>
@@ -30,8 +34,8 @@
             Now you don't
           </div>
         <div class = 'problem-region'>
-            <img :src='getImgSrc' :alt='proTitle'>
-            <br>
+            <div style="height: 700px;">
+                <img :src='getImgSrc' :alt='proTitle' ><br>
                 <input type="radio" id="A" value="A" style="height: 20px; width: 20px;" v-model="picked[problemId - 301]" />
                 <label for="one" style="padding-right: 30px;">A</label>
                 <input type="radio" id="B" value="B" style="height: 20px; width: 20px" v-model="picked[problemId - 301]" />
@@ -41,12 +45,20 @@
                 <input type="radio" id="D" value="D" style="height: 20px; width: 20px" v-model="picked[problemId - 301]" />
                 <label for="two" style="padding-right: 30px;">D</label>
                 <br />
-                <span>Picked: {{ picked }}</span>
+            </div>
             <br>
-            <button @click="nextProblem($event)">NEXT PROBLEM</button>
+                
+                <span style="margin-left: 700px;">Picked: {{ picked }}</span>
             <br>
-            <button @click="preProblem">PREVIOUS PROBLEM</button>
+            <button @click="nextProblem($event)" style="margin-left: 700px;">NEXT PROBLEM</button>
+            <br>
+            <button @click="preProblem" style="margin-left: 700px;">PREVIOUS PROBLEM</button>
         </div>
+        <template v-for="pid in 20">
+            <button @click = 'changeProblem(pid)' :class="{selected: (picked[pid-1] === '')}">{{pid}}</button>
+        </template>
+<!-- 
+        <br>
         <button @click = 'changeTrue'>change css</button>
 
         <div :class = '{problem2: isP2}'>
@@ -57,7 +69,7 @@
                 </li>
                 
             </ol>
-        </div>
+        </div> -->
     </div>
     <script src="./vue3.js"></script>
     <script>
@@ -129,24 +141,28 @@
                     this.isP2 = !this.isP2
                 },
                 nextProblem(event){
-                    this.problemId++
+                    // this.problemId++
                     // this.imgSrc = './20190301/201903010' + this.problemId +'.png' 
-                    console.log(event)
+                    if (this.problemId < 320) {
+                        this.problemId++
+                    }else {
+                        alert('no more questions')
+                    }
                 },
                 preProblem(){
                     if (this.problemId >= 302){
                         this.problemId--
                     }else{
-                        alert('no more previous')
+                        alert('no more previous questions')
                     }
+                },
+                changeProblem(n) {
+                    this.problemId = n + 300
                 }
             }
         }
         const app = Vue.createApp(root)
         const vm = app.mount('#app ')
     </script>
-    <div>
-        new div
-    </div>
 </body>
 </html>
